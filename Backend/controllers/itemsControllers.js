@@ -1,19 +1,16 @@
-import { run } from "node:test";
-
-const httpStataus = require('../Utils/httpStatusText');
+const httpStataus = require("../Utils/httpStatusText");
 
 // getBurgers from database
 
-const Beef = require('../models/item.model');
-//getAllItems from database
+const Beef = require("../models/item.model");
 exports.getAllItems = async (req, res) => {
   try {
   
-    const AllBeefs = await Beef.find();
+    const Beefs = await Beef.find();
     res.status(200).json({
       status: httpStataus.SUCCESS,
       data: {
-        AllBeefs,
+        Beefs,
       },
     });
   } catch (err) {
@@ -26,12 +23,12 @@ exports.getAllItems = async (req, res) => {
 // getspeceficItem burger
 exports.getspeceficItem = async (req, res) => {
   try {
-    const oneBeef = await Beef.findById( req.params.idItem );
+    const oneBeef = await Beef.findById(req.params.idItem);
     if (oneBeef) {
       res.status(200).json({
         status: httpStataus.SUCCESS,
         data: {
-          oneBeef,
+          Beef: oneBeef
         },
       });
     } else {
@@ -49,23 +46,18 @@ exports.getspeceficItem = async (req, res) => {
     });
   }
 };
-// updateSpeceficItem 
+// updateSpeceficItem
 exports.updateSpeceficItem = async (req, res) => {
   try {
-   
-    const oneBeef = await Beef.findByIdAndUpdate(
-        req.params.idItem ,
-        req.body ,
-      {
-        new: true,
-        runValidators: true
-      }
-    );
+    const oneBeef = await Beef.findByIdAndUpdate(req.params.idItem, req.body, {
+      new: true,
+      runValidators: true,
+    });
     if (oneBeef) {
       res.status(200).json({
         status: httpStataus.SUCCESS,
         data: {
-          oneBeef,
+          Beef: oneBeef
         },
       });
     } else {
@@ -96,7 +88,7 @@ exports.deleteSpeceficItem = async (req, res) => {
       res.status(400).json({
         status: httpStataus.FAILED,
         data: {
-          message: 'id is not correct',
+          message: "id is not correct",
         },
       });
     }

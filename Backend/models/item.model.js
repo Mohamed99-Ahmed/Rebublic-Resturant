@@ -12,11 +12,14 @@ const beefSchema = new mongoose.Schema({
     }
   })
   const Beef = mongoose.model("Beef", beefSchema);
-  
+//  (async function call(){
+//  const AllBeefs =await Beef.find();
+//  console.log(AllBeefs)
+// })();
   const newBeef = new Beef({
     name: "worldware 2",
     price: 130  
   });
 
 //   exprorts module
-  exports.module = Beef
+module.exports = Beef
